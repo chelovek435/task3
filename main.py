@@ -1,15 +1,15 @@
 from PyQt6.QtWidgets import QApplication, QWidget
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtCore import Qt
-from PyQt6 import uic
 import sys
 import random
+from u import Ui_Form
 
 
-class main(QWidget):
+class main(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.draw_btn.clicked.connect(self.trigger_paint)
 
@@ -25,10 +25,10 @@ class main(QWidget):
         self.do_paint = False
 
     def draw_circle(self, qp: QPainter):
-        qp.setBrush(QColor(Qt.GlobalColor.yellow))
+        qp.setBrush(QColor(random.randint(0, 0xFFFFFF)))
         d = random.randint(20, 200)
         x = random.randint(0, self.width() - d)
-        y = random.randint(0, self.height() - d)
+        y = random.randint(50, self.height() - d)
         qp.drawEllipse(x, y, d, d)
 
 
